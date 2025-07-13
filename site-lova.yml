@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zahralova-deployment
+  name: nginx
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: site_web
+      app: nginx
   template:
     metadata:
       labels:
-        app: site_web
+        app: nginx
     spec:
       containers:
-        - name: zahralova-site
-          image: rootroot23/zahralova
+        - name: nginx
+          image: nginx:1.14.2
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: zahra-service
+  name: servicedoumbiss
 spec:
   type: NodePort
   selector:
-    app: site_web
+    app: nginx
   ports:
     - protocol: TCP
       port: 80
